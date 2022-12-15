@@ -23,7 +23,7 @@ const Products = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products?page=${pageNumber}&size=${size}`)
+        fetch(`https://gadget-world-server-production.up.railway.app/products?page=${pageNumber}&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products)

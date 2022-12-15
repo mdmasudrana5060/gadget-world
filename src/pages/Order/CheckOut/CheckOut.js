@@ -34,7 +34,7 @@ const CheckOut = () => {
 
 
     const onSubmit = (data) => {
-        fetch('http://localhost:5000/orders', {
+        fetch('https://gadget-world-server-production.up.railway.app/orders', {
             method: "POST",
             headers: {
                 'content-type': "application/json"
