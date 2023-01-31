@@ -2,14 +2,17 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import auth from '../../../firebase.init';
+import { clearTheCart } from '../../../Utilities/localStorage';
 import useCart from '../../Hooks/useCart';
 
 const CheckOut = () => {
-    const [cart] = useCart();
+    const [cart, setCart] = useCart();
     const { register, handleSubmit, reset } = useForm();
     const [user] = useAuthState(auth);
     console.log(user);
-    console.log(cart);
+
+
+
     let price = 0;
     const shipping = 60;
     let total;
@@ -29,23 +32,36 @@ const CheckOut = () => {
         total = (price + vat + shipping).toFixed(2);
     }
 
-    console.log(total, 'total');
+
 
 
 
     const onSubmit = (data) => {
-        fetch('https://gadget-world-server-production.up.railway.app/orders', {
+        const order = {
+            ...data,
+            cart: cart,
+            total
+        }
+
+
+
+
+        fetch('https://gadget-world-server-flax.vercel.app/orders', {
             method: "POST",
             headers: {
                 'content-type': "application/json"
             },
-            body: JSON.stringify({ data, cart })
+            body: JSON.stringify(order)
         })
             .then(res => res.json())
             .then((result => {
                 if (result.insertedId) {
                     window.alert('payment done successfully');
-                    reset();
+                    reset()
+                    clearTheCart();
+
+
+
                 }
             }))
     }
@@ -56,11 +72,12 @@ const CheckOut = () => {
 
                 <div className="personal-detail">
                     <input type="text" name="" {...register("name", { required: true })} placeholder="Enter Your Name"
-                        defaultValue={user.displayName} className="input input-bordered w-full max-w-xs pb-1" id="" /> <br />
+                        defaultValue={user.displayName || user.name} className="input input-bordered w-full max-w-xs pb-1" id="" required /> <br />
                     <input type="email" name="" {...register("email", { required: true })} placeholder="Email" defaultValue={user.email} className="input input-bordered w-full max-w-xs  pb-2.5" readOnly /> <br />
-                    <input type="text" name="" {...register('phoneNumber')} placeholder="Phone number" className="input input-bordered w-full max-w-xs " /> <br />
-                    <input type="text" name="" {...register('address')} placeholder="Address" className="input input-bordered w-full max-w-xs  " /> <br />
-                    <input defaultValue={total} readOnly className="input input-bordered w-full max-w-xs " /> <br /> <br />
+                    <input type="number" name="" {...register("phone", { required: true })} placeholder="Phone" className="input input-bordered w-full max-w-xs  pb-2.5" />
+                    <br />
+                    <input type="text" name="address"  {...register('address')} placeholder="Address" className="input input-bordered w-full max-w-xs  " /> <br />
+                    <input value={total} readOnly className="input input-bordered w-full max-w-xs " /> <br /> <br />
 
                     <button type="submit" className="btn btn-warning"> Checkout</button>
 

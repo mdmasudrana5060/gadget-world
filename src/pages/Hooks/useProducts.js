@@ -7,7 +7,7 @@ const useProducts = () => {
 
 
     useEffect(() => {
-        fetch(`https://gadget-world-server-production.up.railway.app/products`)
+        fetch(`https://gadget-world-server-flax.vercel.app/products`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products)

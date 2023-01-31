@@ -32,9 +32,21 @@ const Login = () => {
     if (user || gUser) {
         navigate(from, { replace: true })
     }
-    const onSubmit = data => {
+    const onSubmit = async data => {
         console.log(data);
-        signInWithEmailAndPassword(data.email, data.password)
+        const email = data.email;
+        await signInWithEmailAndPassword(data.email, data.password)
+        fetch(`https://gadget-world-server-flax.vercel.app/login`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ email })
+        })
+            .then(res => res.json())
+            .then(data => {
+                localStorage.setItem('accessToken', data.accessToken)
+            })
     }
     return (
         <div className='flex h-full mt-10 justify-center items-center '>

@@ -30,7 +30,7 @@ const OrderReview = () => {
             </div>
             <div className='cart'>
                 <Cart cart={cart}>
-                    <Link to="/checkout">
+                    <Link to='/checkout'>
                         <button className="btn btn-primary ml-6 mt-3">Place order</button>
                     </Link>
                 </Cart>

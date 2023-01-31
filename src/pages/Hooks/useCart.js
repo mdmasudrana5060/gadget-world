@@ -9,7 +9,7 @@ const useCart = () => {
         const savedCart = [];
 
         const keys = Object.keys(storedCart)
-        fetch('https://gadget-world-server-production.up.railway.app/productsByKeys', {
+        fetch('https://gadget-world-server-flax.vercel.app/productsByKeys', {
             method: "POST",
             headers: {
                 'content-type': "application/json"

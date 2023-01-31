@@ -8,6 +8,7 @@ import OrderReview from './pages/Order/OrderReview/OrderReview';
 import Footer from './pages/Shared/Footer';
 import Navbar from './pages/Shared/Navbar';
 import RedirectAuth from './pages/Login/RedirectAuth';
+import MyOrder from './pages/Order/MyOrder/MyOrder';
 
 
 function App() {
@@ -26,6 +27,12 @@ function App() {
         <Route path="/checkout" element={
           <RedirectAuth>
             <CheckOut />
+
+          </RedirectAuth>
+        } />
+        <Route path="/myorder" element={
+          <RedirectAuth>
+            <MyOrder />
 
           </RedirectAuth>
         } />
