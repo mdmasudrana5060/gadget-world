@@ -46,10 +46,12 @@ const CheckOut = () => {
 
 
 
-        fetch('https://gadget-world-server-flax.vercel.app/orders', {
+        fetch('hhttp://localhost:5000/orders', {
             method: "POST",
             headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`,
                 'content-type': "application/json"
+
             },
             body: JSON.stringify(order)
         })

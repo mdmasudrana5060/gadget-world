@@ -27,7 +27,7 @@ const Navbar = () => {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/order">Order</Link></li>
                         <li><Link to="/myorder">My Order</Link></li>
-                        <li>{user ? < button className="btn btn-active btn-ghost" onClick={logout}>Log Out</button> : <Link to="/login">Login</Link>}</li>
+                        {/* <li>{user ? < button className="btn btn-active btn-ghost" onClick={logout}>Log Out</button> : <Link to="/login">Login</Link>}</li> */}
 
 
                     </ul >
@@ -39,8 +39,8 @@ const Navbar = () => {
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to="/order">Order</Link></li>
                     <li><Link to="/myorder">My Order</Link></li>
-
-                    <li>{user ? < button className="btn btn-active btn-ghost" onClick={logout}>Log Out</button> : <Link to="/login">Login</Link>}</li>
+                    {/* 
+                    <li>{user ? < button className="btn btn-active btn-ghost" onClick={logout}>Log Out</button> : <Link to="/login">Login</Link>}</li> */}
                 </ul >
             </div >
 

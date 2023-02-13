@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Product from '../Product/Product';
 import Cart from '../../Order/Cart/Cart';
 import { addToCart, getStoredCart, removeFromDb } from '../../../Utilities/localStorage';
-import useProducts from '../../Hooks/useProducts'
+
 
 import { Link } from 'react-router-dom';
 import useCart from '../../Hooks/useCart';
@@ -23,7 +23,7 @@ const Products = () => {
 
 
     useEffect(() => {
-        fetch(`https://gadget-world-server-flax.vercel.app/products?page=${pageNumber}&size=${size}`)
+        fetch(`hhttp://localhost:5000/products?page=${pageNumber}&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products)
@@ -35,12 +35,6 @@ const Products = () => {
 
             })
     }, [pageNumber]);
-
-
-
-
-
-
 
 
 
@@ -82,16 +76,17 @@ const Products = () => {
         <>
             <div className="form-control  ">
 
-                <input type="text" placeholder="Search" className="input input-bordered mt-1" onChange={handleSearch} />
+                <div className='flex justify-center '>
+                    <input type="text" placeholder="Search" className="input input-bordered mt-1 input-md w-full max-w-xs mr-40 " onChange={handleSearch} />
+                </div>
             </div>
-            <div className="shop-container mt-2">
-
+            <div className="shop-container mt-2 ">
 
                 <div>
 
                     <div >
                         <div >
-                            <h2 className='text-5xl text-center font-bold text-secondary'>Gadgets</h2>
+                            <h2 className='text-5xl text-center font-bold text-secondary ml-16'>Gadgets</h2>
 
 
                         </div>

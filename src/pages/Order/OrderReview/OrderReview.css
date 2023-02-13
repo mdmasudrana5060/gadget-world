@@ -4,6 +4,15 @@
 
 }
 
+@media only screen and (max-width: 600px) {
+
+    .order-container {
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .cart {
     background-color: blanchedalmond;
 }

@@ -30,7 +30,7 @@ const Cart = (props) => {
 
     return (
         <div className='cart'>
-            <h2 className='text-2xl p-4 text-center font-bold'>Order Summery</h2>
+            <h2 className='text-2xl  text-center font-bold'>Order Summery</h2>
 
             <h4 className=' text-xl text-justify pl-6'>Items Ordered:{totalQuantity}</h4>
             <p className=' text-xl text-justify pl-6'>Price:${price}</p>

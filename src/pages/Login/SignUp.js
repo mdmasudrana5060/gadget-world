@@ -1,45 +1,80 @@
-import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
+import React, { useContext, useState } from 'react';
+
 import { useForm } from "react-hook-form";
-import Loading from '../Shared/Loading';
-import { Link } from 'react-router-dom';
+
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
+import useToken from '../Hooks/useToken';
 
 const SignUp = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [
-        createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-    const [updateProfile, updating, profileError] = useUpdateProfile(auth);
+    const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
+    const [signUpError, setSignUpError] = useState('');
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
 
-
-    const onSubmit = async data => {
-        await createUserWithEmailAndPassword(data.email, data.password);
-        await updateProfile({ displayName: data.name });
-        console.log('update done');
-    }
-    if (loading || gLoading) {
-        return <Loading></Loading>
-    }
-    let signUpError;
-
-    if (error || gError || profileError) {
-        signUpError = <p className='text-red-500'>{error?.message || gError?.message || profileError?.message}</p>
+    const navigate = useNavigate();
+    if (token) {
+        navigate('/')
     }
 
-    if (user || gUser) {
-
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(result);
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
     }
+    const handleSignUp = data => {
+        setSignUpError('')
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                toast('User Created Successfully')
+                const userInfo = {
+                    displayName: data.name,
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(user.displayName, user.email)
+                    })
+                    .catch(error => console.log(error))
+
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setSignUpError(errorMessage)
+            });
+    }
+    const saveUser = (name, email) => {
+        const user = { name, email };
+        fetch('http://localhost:5000/users', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setCreatedUserEmail(email)
+                console.log(data);
+            })
+    }
+
+
+
     return (
         <div className='flex h-full mt-10 justify-center items-center '>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="text-center text-2xl font-bold">Sign Up</h2>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(handleSignUp)}>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text">Name</span>
@@ -121,7 +156,7 @@ const SignUp = () => {
                     </form>
                     <p><small>Already have an account? <Link className='text-accent' to='/login'>Please login.</Link></small></p>
                     <div className="divider">OR</div>
-                    <button onClick={() => signInWithGoogle()} className="btn btn-outline" > Continue with google</button >
+                    <button onClick={handleGoogleSignIn} className="btn btn-outline" > Continue with google</button >
 
                 </div >
             </div >

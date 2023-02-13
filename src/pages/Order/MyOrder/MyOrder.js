@@ -11,17 +11,14 @@ import Loading from '../../Shared/Loading';
 const MyOrder = () => {
     const [user] = useAuthState(auth);
     const [myOrder, setMyOrder] = useState([]);
-
-
     const navigate = useNavigate();
     const email = user.email;
     useEffect(() => {
 
-        fetch(`https://gadget-world-server-flax.vercel.app/orders?email=${email}`, {
+        fetch(`hhttp://localhost:5000/orders?email=${email}`, {
             headers: {
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
-
         })
             .then(res => {
 
@@ -33,6 +30,7 @@ const MyOrder = () => {
                 return res.json();
             })
             .then(data => {
+                console.log(data)
                 setMyOrder(data)
 
 
@@ -42,7 +40,7 @@ const MyOrder = () => {
 
 
 
-    }, []);
+    }, [email]);
     const carts = []
 
     if (myOrder.length === 0) {
@@ -62,31 +60,43 @@ const MyOrder = () => {
     console.log(carts);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return (
         <div className='mb-72'>
             <h2 className='text-center text-4xl text-secondary' >My Order{myOrder.length}</h2>
-            {
-                carts.map(cart => <li className='mx-8'>{cart.name}</li>)
-            }
 
 
+            <div className="overflow-x-auto m-12">
+                <table className="table w-full">
+
+
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Favorite Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {
+                            carts?.map((cart, i) => <tr className="active" key={cart._id}>
+                                <th>{i + 1}</th>
+                                <td>{cart.name}</td>
+                                <td>{cart.price}</td>
+                                <td>Purple</td>
+                            </tr>)
+                        }
+
+
+
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     );

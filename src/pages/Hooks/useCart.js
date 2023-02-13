@@ -9,7 +9,7 @@ const useCart = () => {
         const savedCart = [];
 
         const keys = Object.keys(storedCart)
-        fetch('https://gadget-world-server-flax.vercel.app/productsByKeys', {
+        fetch('hhttp://localhost:5000/productsByKeys', {
             method: "POST",
             headers: {
                 'content-type': "application/json"
