@@ -1,0 +1,22 @@
+.order-container {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .order-container {
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.cart {
+    background-color: blanchedalmond;
+}
+
+.place {
+    margin-left: -100px;
+}

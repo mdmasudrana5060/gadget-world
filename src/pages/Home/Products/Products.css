@@ -1,0 +1,25 @@
+.shop-container {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .shop-container {
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* .headline-search {
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+} */
+
+.cart {
+
+    background-color: blanchedalmond;
+    margin-top: 70px;
+}
