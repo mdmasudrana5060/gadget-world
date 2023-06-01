@@ -44,7 +44,7 @@ const CheckOut = () => {
         }
 
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://gadget-world-server-p5pu-git-main-mdmasudrana5060.vercel.app/orders', {
             method: "POST",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`,

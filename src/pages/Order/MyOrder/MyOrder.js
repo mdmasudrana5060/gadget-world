@@ -10,7 +10,7 @@ const MyOrder = () => {
     const email = user.email;
     useEffect(() => {
 
-        fetch(`http://localhost:5000/orders?email=${email}`, {
+        fetch(`https://gadget-world-server-p5pu-git-main-mdmasudrana5060.vercel.app/orders?email=${email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
