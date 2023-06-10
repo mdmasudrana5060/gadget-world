@@ -4,7 +4,7 @@ const useToken = email => {
     const [token, setToken] = useState('');
     useEffect(() => {
         if (email) {
-            fetch(`https://gadget-world-server-p5pu-git-main-mdmasudrana5060.vercel.app/jwt?email=${email}`)
+            fetch(`https://gadget-world-server-p5pu.vercel.app/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

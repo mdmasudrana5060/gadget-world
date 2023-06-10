@@ -15,7 +15,8 @@ const CheckOut = () => {
 
     let price = 0;
     const shipping = 60;
-    let total;
+    let total='$';
+   
     let name;
     let totalQuantity = 0;
     for (const product of cart) {
@@ -29,7 +30,7 @@ const CheckOut = () => {
     }
     const vat = Math.ceil(price * 0.1);
     if (price > 0) {
-        total = (price + vat + shipping).toFixed(2);
+        total =total+ (price + vat + shipping).toFixed(2);
     }
 
 
@@ -37,14 +38,17 @@ const CheckOut = () => {
 
 
     const onSubmit = (data) => {
-        const order = {
+        const order = [
             ...data,
-            cart: cart,
+             cart,
             total
-        }
+        
+
+        ]
+          
 
 
-        fetch('https://gadget-world-server-p5pu-git-main-mdmasudrana5060.vercel.app/orders', {
+        fetch('https://gadget-world-server-p5pu.vercel.app/orders', {
             method: "POST",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`,
@@ -75,7 +79,7 @@ const CheckOut = () => {
                     <input type="number" name="" {...register("phone", { required: true })} placeholder="Phone" className="input input-bordered w-full max-w-xs  pb-2.5" />
                     <br />
                     <input type="text" name="address"  {...register('address')} placeholder="Address" className="input input-bordered w-full max-w-xs  " /> <br />
-                    <input value={total} readOnly className="input input-bordered w-full max-w-xs " /> <br /> <br />
+                <input value={total} readOnly className="input input-bordered w-full max-w-xs " /> <br /> <br />
 
                     <button type="submit" className="btn btn-warning"> Checkout</button>
 
