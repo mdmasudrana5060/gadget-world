@@ -38,13 +38,14 @@ const CheckOut = () => {
 
 
     const onSubmit = (data) => {
-        const order = [
+        const order = {
             ...data,
-             cart,
-            total
+            cart:cart,
+            total:total,
+        }
         
 
-        ]
+        
           
 
 

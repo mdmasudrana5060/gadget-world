@@ -78,7 +78,7 @@ const MyOrder = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Favorite Color</th>
+                         
                         </tr>
                     </thead>
                     <tbody>
@@ -88,7 +88,7 @@ const MyOrder = () => {
                                 <th>{i + 1}</th>
                                 <td>{cart.name}</td>
                                 <td>${cart.price}</td>
-                                <td>Purple</td>
+                             
                             </tr>)
                         }
 
