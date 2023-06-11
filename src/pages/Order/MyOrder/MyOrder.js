@@ -12,7 +12,7 @@ const MyOrder = () => {
  
     
     useEffect(() => {
-      fetch(`https://gadget-world-server-henna.vercel.app/orders?email=${email}`, {
+      fetch(`https://gadget-world.onrender.com/orders?email=${email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }

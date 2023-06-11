@@ -6,6 +6,7 @@ import Cart from '../../Order/Cart/Cart';
 import Product from '../Product/Product';
 import "./Products.css"
 
+
 const Products = () => {
     const [products, setProducts] = useState([])
 
@@ -13,22 +14,25 @@ const Products = () => {
     const [displayProducts, setDisplayProducts] = useState([]);
     const [pagesCount, setPagesCount] = useState(0);
     const [pageNumber, setPageNumber] = useState(0);
-    const size = 15;
+   
 
+  
 
     useEffect(() => {
-        fetch(`https://gadget-world-server-henna.vercel.app/products?page=${pageNumber}&size=${size}`)
+        fetch(`https://gadget-world.onrender.com/products?page=${pageNumber}&size=${15}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products)
                 setDisplayProducts(data.products);
+              
                 const count = (data.count);
-                const pages = Math.ceil(count / size);
+                const pages = Math.ceil(count / 15);
                 setPagesCount(pages);
 
 
             })
     }, [pageNumber]);
+    
 
 
 
@@ -93,6 +97,7 @@ const Products = () => {
                             displayProducts.map(product => <Product product={product}
                                 handleAddToCart={handleAddToCart}
                                 handleDelete={handleDelete}
+                                
                                 key={product._id}>
 
                             </Product>)

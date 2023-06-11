@@ -49,7 +49,7 @@ const CheckOut = () => {
           
 
 
-        fetch('https://gadget-world-server-henna.vercel.app/orders', {
+        fetch('https://gadget-world.onrender.com/orders', {
             method: "POST",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`,

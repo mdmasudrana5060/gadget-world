@@ -9,7 +9,7 @@ import useToken from '../Hooks/useToken';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signIn } = useContext(AuthContext);
+    const { signIn ,googleSignIn} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginEmail, setLoginEmail] = useState('');
     const location = useLocation();
@@ -40,6 +40,15 @@ const Login = () => {
             });
     }
     const handleGoogleSignIn = () => {
+        googleSignIn()
+        .then(result=>{
+            const user=result.user;
+            console.log(user)
+            navigate('/')
+        })
+        .catch((error)=>{
+            console.log(error.message)
+        })
 
     }
 

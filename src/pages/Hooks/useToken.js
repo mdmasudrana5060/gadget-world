@@ -4,7 +4,7 @@ const useToken = email => {
     const [token, setToken] = useState('');
     useEffect(() => {
         if (email) {
-            fetch(`https://gadget-world-server-henna.vercel.app/jwt?email=${email}`)
+            fetch(`https://gadget-world.onrender.com/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
