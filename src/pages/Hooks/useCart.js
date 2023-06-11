@@ -9,7 +9,7 @@ const useCart = () => {
         const savedCart = [];
 
         const keys = Object.keys(storedCart)
-        fetch('https://gadget-world-server-p5pu.vercel.app/productsByKeys', {
+        fetch('https://gadget-world-server-henna.vercel.app/productsByKeys', {
             method: "POST",
             headers: {
                 'content-type': "application/json"

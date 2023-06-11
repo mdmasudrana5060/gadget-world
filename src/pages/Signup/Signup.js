@@ -53,7 +53,7 @@ const Signup = () => {
 
     const saveUser = (name, email) => {
         const user = { name, email };
-        fetch('https://gadget-world-server-p5pu.vercel.app/users', {
+        fetch('https://gadget-world-server-henna.vercel.app/users', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

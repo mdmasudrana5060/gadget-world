@@ -12,7 +12,7 @@ const MyOrder = () => {
  
     
     useEffect(() => {
-      fetch(`https://gadget-world-server-p5pu.vercel.app/orders?email=${email}`, {
+      fetch(`https://gadget-world-server-henna.vercel.app/orders?email=${email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
@@ -37,7 +37,7 @@ const MyOrder = () => {
 
    
     
-    console.log(myOrder,'hello')
+    
     const carts = []
 
     if (myOrder.length === 0) {

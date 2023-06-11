@@ -49,7 +49,7 @@ const CheckOut = () => {
           
 
 
-        fetch('https://gadget-world-server-p5pu.vercel.app/orders', {
+        fetch('https://gadget-world-server-henna.vercel.app/orders', {
             method: "POST",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`,
@@ -61,7 +61,7 @@ const CheckOut = () => {
             .then(res => res.json())
             .then((result => {
                 if (result.insertedId) {
-                    window.alert('payment done successfully');
+                    window.alert('order done successfully');
                     reset()
                     clearTheCart();
                     navigate('/');
