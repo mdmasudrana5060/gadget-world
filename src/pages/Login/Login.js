@@ -12,11 +12,14 @@ const Login = () => {
     const { signIn ,googleSignIn} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginEmail, setLoginEmail] = useState('');
+    const [gLoginEmail, setGLoginEmail] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
     const [token] = useToken(loginEmail);
+    const [Gtoken] = useToken(gLoginEmail);
+   
     const from = location.state?.from?.pathname || '/';
-    if (token) {
+    if (token|| Gtoken) {
         navigate(from, { replace: true });
 
     }
@@ -43,8 +46,9 @@ const Login = () => {
         googleSignIn()
         .then(result=>{
             const user=result.user;
-            console.log(user)
-            navigate('/')
+      
+        setGLoginEmail(user.email)
+        
         })
         .catch((error)=>{
             console.log(error.message)

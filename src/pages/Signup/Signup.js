@@ -12,10 +12,13 @@ const Signup = () => {
     const [signUpError, setSignUpError] = useState('');
     const { createUser, updateUser,googleSignIn } = useContext(AuthContext);
     const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [glogin, setGlogin] = useState('');
+  
     const [token] = useToken(createdUserEmail);
+    const [gtoken] = useToken(glogin);
     const navigate = useNavigate();
   
-    if (token) {
+    if (token|| gtoken) {
         navigate('/')
     }
 
@@ -52,7 +55,7 @@ const Signup = () => {
         googleSignIn()
         .then(result=>{
             const user=result.user;
-            console.log(result)
+            setGlogin(user.email)
         })
         .catch(error=>{
             console.log(error.message)
@@ -62,7 +65,9 @@ const Signup = () => {
     // post the data of user in database
 
     const saveUser = (name, email) => {
+        
         const user = { name, email };
+        console.log(user,'from saveUser')
         fetch('https://gadget-world.onrender.com/users', {
             method: "POST",
             headers: {
@@ -72,6 +77,7 @@ const Signup = () => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(email,'inside then data')
                 setCreatedUserEmail(email);
                 navigate('/')
             })

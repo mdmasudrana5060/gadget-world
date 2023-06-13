@@ -8,13 +8,14 @@ const MyOrder = () => {
     const [myOrder, setMyOrder] = useState([]);
     const navigate = useNavigate();
     const email = user.email;
-    console.log(email)
+  
  
     
     useEffect(() => {
       fetch(`https://gadget-world.onrender.com/orders?email=${email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
+                
             }
         })
             .then(res => {
@@ -29,6 +30,7 @@ const MyOrder = () => {
             .then(data => {
                 
                 setMyOrder(data)
+                console.log(data)
 
 
             })
@@ -44,24 +46,24 @@ const MyOrder = () => {
         <Loading></Loading>
 
     }
-    else {
+    // else {
        
-        const length = myOrder.length - 1;
+    //     const length = myOrder.length - 1;
   
-        const order = myOrder[length];
-        console.log(order,'order')
-        const products = order.cart;
-        console.log(order.cart,'order cart');
-        console.log(products,'products')
-        for(let i=0;i<length;i++){
-            carts.push(products)
-        }
-        console.log(products);
-        carts.push(...products)
+    //     const order = myOrder[length];
+    //     console.log(order,'order')
+    //     const products = order.cart;
+    //     console.log(order.cart,'order cart');
+    //     console.log(products,'products')
+    //     for(let i=0;i<length;i++){
+    //         carts.push(products)
+    //     }
+    //     console.log(products);
+    //     carts.push(...products)
 
 
 
-    }
+    // }
     console.log(carts,'from carts');
 
     return (
@@ -84,7 +86,7 @@ const MyOrder = () => {
                     <tbody>
 
                         {
-                            carts?.map((cart, i) => <tr className="active" key={cart._id}>
+                            myOrder?.map((cart, i) => <tr className="active" key={cart._id}>
                                 <th>{i + 1}</th>
                                 <td>{cart.name}</td>
                                 <td>${cart.price}</td>
