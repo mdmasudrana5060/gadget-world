@@ -5,11 +5,12 @@ import useCart from '../../Hooks/useCart';
 import Cart from '../../Order/Cart/Cart';
 import Product from '../Product/Product';
 import "./Products.css"
+import Loading from '../../Shared/Loading';
+
 
 
 const Products = () => {
-    const [products, setProducts] = useState([])
-
+    const [products, setProducts] = useState([]);
     const [cart, setCart] = useCart();
     const [displayProducts, setDisplayProducts] = useState([]);
     const [pagesCount, setPagesCount] = useState(0);
@@ -22,6 +23,7 @@ const Products = () => {
         fetch(`https://gadget-world.onrender.com/products?page=${pageNumber}&size=${15}`)
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setProducts(data.products)
                 setDisplayProducts(data.products);
               
@@ -32,6 +34,7 @@ const Products = () => {
 
             })
     }, [pageNumber]);
+
     
 
 
@@ -58,8 +61,10 @@ const Products = () => {
         addToCart(product._id)
 
     }
-    const handleDelete = (_id) => {
-        removeFromDb(_id)
+    const handleDelete = (_id) => { 
+        const newCart = cart.filter(product => product._id !== _id);
+        setCart(newCart);
+        removeFromDb(_id);
     }
     const handleSearch = e => {
         const searchText = e.target.value;
@@ -91,8 +96,9 @@ const Products = () => {
 
 
                     <div className="divider"></div>
-
-                    <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mx-10">
+                    {
+                        displayProducts.length?
+                        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mx-10">
                         {
                             displayProducts.map(product => <Product product={product}
                                 handleAddToCart={handleAddToCart}
@@ -104,7 +110,15 @@ const Products = () => {
                         }
 
 
-                    </div>
+                    </div>:
+                    <Loading></Loading>
+                    }
+           
+                          
+                    
+                   
+
+            
                     <div className="btn-group m-2.5 flex justify-center pagination">
                         {
                             [...Array(pagesCount).keys()].map(number => <button

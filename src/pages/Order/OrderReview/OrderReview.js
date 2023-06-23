@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { removeFromDb } from '../../../Utilities/localStorage';
 import useCart from '../../Hooks/useCart';
-// import useProducts from '../../Hooks/useProducts'
+import useProducts from '../../Hooks/useProducts'
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import "./OrderReview.css";
 
 
 const OrderReview = () => {
-    // const [products] = useProducts();
+    const [products] = useProducts();
     const [cart, setCart] = useCart();
   
     const handleRemove = _id => {

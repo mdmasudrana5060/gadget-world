@@ -13,6 +13,7 @@ const CheckOut = () => {
 
 
 
+
     let price = 0;
     const shipping = 60;
     let total='$';
@@ -40,13 +41,12 @@ const CheckOut = () => {
     const onSubmit = (data) => {
         const order = {
             ...data,
-            cart:cart,
-            total:total,
-        }
-        
+            ...cart,
+            total,
 
+        }
+           
         
-          
 
 
         fetch('https://gadget-world.onrender.com/orders', {

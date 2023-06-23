@@ -23,9 +23,21 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     };
     // google SIgnIn
+    // const googleSignIn=()=>{
+    //     setLoading(true);
+    //    signInWithPopup(auth,googleProvider)
+        
+    // }
     const googleSignIn=()=>{
         setLoading(true);
-        return signInWithPopup(auth,googleProvider)
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                console.log(result.user);
+                setUser(result.user);
+            })
+            .finally(() => setLoading(false))
+
+        
     }
     // update user
     const updateUser = (userInfo) => {

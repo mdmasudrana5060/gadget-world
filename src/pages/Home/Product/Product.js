@@ -5,7 +5,7 @@ import React from 'react';
 import Rating from 'react-rating';
 
 const Product = (props) => {
-    const { handleAddToCart, product, handleDelete } = props
+    const { handleAddToCart, product, handleDelete } = props;
     const { name, price, img, star, _id } = props.product;
     return (
         <div className="card bg-base-100 shadow-xl card-normal ">

@@ -42,19 +42,19 @@ const Login = () => {
                 setLoginError(error.message);
             });
     }
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-        .then(result=>{
-            const user=result.user;
+    // const handleGoogleSignIn = () => {
+    //     googleSignIn()
+    //     .then(result=>{
+    //         const user=result.user;
       
-        setGLoginEmail(user.email)
+    //     setGLoginEmail(user.email)
         
-        })
-        .catch((error)=>{
-            console.log(error.message)
-        })
+    //     })
+    //     .catch((error)=>{
+    //         console.log(error.message)
+    //     })
 
-    }
+    // }
 
     return (
         <div className='h-[800px] flex justify-center mt-40'>
@@ -100,7 +100,7 @@ const Login = () => {
                 </form>
                 <p>New to Doctors Portal ? <Link to="/signup" className='text-secondary'>Create New Account</Link> </p>
                 <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full font-bold'>Continue With Google</button>
+                <button onClick={googleSignIn} className='btn btn-outline w-full font-bold'>Continue With Google</button>
 
 
             </div>

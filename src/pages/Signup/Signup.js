@@ -51,17 +51,17 @@ const Signup = () => {
             });
 
     }
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-        .then(result=>{
-            const user=result.user;
-            setGlogin(user.email)
-        })
-        .catch(error=>{
-            console.log(error.message)
-        })
+    // const handleGoogleSignIn = () => {
+    //     googleSignIn()
+    //     .then(result=>{
+    //         const user=result.user;
+    //         setGlogin(user.email)
+    //     })
+    //     .catch(error=>{
+    //         console.log(error.message)
+    //     })
 
-    }
+    // }
     // post the data of user in database
 
     const saveUser = (name, email) => {
@@ -132,7 +132,7 @@ const Signup = () => {
                 </form>
                 <p>Already have an account! <Link to="/login" className='text-secondary'>Please Login</Link> </p>
                 <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full font-bold'>Continue With Google</button>
+                <button onClick={googleSignIn} className='btn btn-outline w-full font-bold'>Continue With Google</button>
 
             </div>
 

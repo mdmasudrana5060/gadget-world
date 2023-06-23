@@ -46,24 +46,24 @@ const MyOrder = () => {
         <Loading></Loading>
 
     }
-    // else {
+    else {
        
-    //     const length = myOrder.length - 1;
+        const length = myOrder.length - 1;
   
-    //     const order = myOrder[length];
-    //     console.log(order,'order')
-    //     const products = order.cart;
-    //     console.log(order.cart,'order cart');
-    //     console.log(products,'products')
-    //     for(let i=0;i<length;i++){
-    //         carts.push(products)
-    //     }
-    //     console.log(products);
-    //     carts.push(...products)
+        const order = myOrder[length];
+        console.log(order,'order')
+        const products = order.cart;
+        console.log(order.cart,'order cart');
+        console.log(products,'products')
+        for(let i=0;i<length;i++){
+            carts.push(products)
+        }
+        console.log(products);
+        carts.push(...products)
 
 
 
-    // }
+    }
     console.log(carts,'from carts');
 
     return (
