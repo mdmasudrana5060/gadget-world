@@ -25,6 +25,31 @@ const addToCart = (id) => {
 
     updateDb(shoppingCart);
 }
+const minusFromCart = (id) => {
+    let shoppingCart;
+    let storedCart = getDb();
+    if (storedCart) {
+        shoppingCart = JSON.parse(storedCart)
+
+    }
+   
+
+    const quantity = shoppingCart[id];
+
+    if (quantity>1) {
+
+        const newQuantity = quantity - 1;
+        shoppingCart[id] = newQuantity;
+
+    }
+    else{
+  
+        delete shoppingCart[id];
+    }
+  
+
+    updateDb(shoppingCart);
+}
 const getDb = () => localStorage.getItem('shopping-cart');
 const updateDb = (cart) => localStorage.setItem('shopping-cart', JSON.stringify(cart));
 const getStoredCart = () => {
@@ -53,6 +78,7 @@ const removeFromDb = id => {
 
     }
 }
+
 const clearTheCart = () => {
     localStorage.removeItem('shopping-cart')
 }
@@ -60,5 +86,6 @@ export {
     addToCart,
     removeFromDb,
     clearTheCart,
-    getStoredCart
+    getStoredCart,
+    minusFromCart
 };

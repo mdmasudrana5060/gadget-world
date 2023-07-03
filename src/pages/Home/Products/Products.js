@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { addToCart, removeFromDb } from '../../../Utilities/localStorage';
+import { addToCart, minusFromCart, removeFromDb } from '../../../Utilities/localStorage';
 import useCart from '../../Hooks/useCart';
 import Cart from '../../Order/Cart/Cart';
 import Product from '../Product/Product';
@@ -23,7 +23,7 @@ const Products = () => {
         fetch(`https://gadget-world.onrender.com/products?page=${pageNumber}&size=${15}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+              
                 setProducts(data.products)
                 setDisplayProducts(data.products);
               
@@ -61,10 +61,36 @@ const Products = () => {
         addToCart(product._id)
 
     }
-    const handleDelete = (_id) => { 
-        const newCart = cart.filter(product => product._id !== _id);
+    const handleDelete = (product) => { 
+        console.log(product);
+        console.log(cart);
+        let newCart = [];
+      
+        const exists = cart.find(pd => pd._id === product._id);
+        // console.log(exists,'from handle delete')
+        if (exists) {
+            const rest = cart.filter(pd => pd._id !== product._id)
+           if(exists.quantity>1){
+            exists.quantity = exists.quantity - 1;
+            newCart=[...rest,product]
+
+           }
+           else{
+            newCart=[...rest];
+           }
+           
+
+
+        }
+        else{
+            newCart=[...cart]
+        }
         setCart(newCart);
-        removeFromDb(_id);
+        minusFromCart(product._id)
+       
+
+        
+      
     }
     const handleSearch = e => {
         const searchText = e.target.value;

@@ -8,7 +8,6 @@ const Banner = () => {
     return (
       <Carousel >
       <img
-    
         src='https://i.ibb.co/xCxvP3t/2234455.jpg'
         alt="image 1"
         className="h-full w-full object-cover"

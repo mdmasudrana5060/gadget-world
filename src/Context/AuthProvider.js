@@ -12,33 +12,36 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
 
+
     // creating user
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     };
+
     // login user
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
     };
     // google SIgnIn
-    // const googleSignIn=()=>{
-    //     setLoading(true);
-    //    signInWithPopup(auth,googleProvider)
-        
-    // }
     const googleSignIn=()=>{
         setLoading(true);
-        signInWithPopup(auth, googleProvider)
-            .then((result) => {
-                console.log(result.user);
-                setUser(result.user);
-            })
-            .finally(() => setLoading(false))
-
+       signInWithPopup(auth,googleProvider)
         
     }
+    // const googleSignIn=()=>{
+    //     setLoading(true);
+    //     signInWithPopup(auth, googleProvider)
+    //         .then((result) => {
+    //             console.log(result.user);
+    //             setUser(result.user);
+                
+    //         })
+    //         .finally(() => setLoading(false))
+
+        
+    // }
     // update user
     const updateUser = (userInfo) => {
         return updateProfile(auth.currentUser, userInfo)
@@ -64,7 +67,8 @@ const AuthProvider = ({ children }) => {
         user,
         updateUser,
         loading,
-        googleSignIn
+        googleSignIn,
+       
 
     }
     return (

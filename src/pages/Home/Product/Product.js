@@ -27,7 +27,7 @@ const Product = (props) => {
 
                 <div className="card-actions">
                     <button className="btn btn-primary " onClick={() => handleAddToCart(product)}>    <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon><p className='ml-1'> Add To Cart</p></button>
-                    <button className="btn btn-primary " onClick={() => handleDelete(_id)}>delete</button>
+                    <button className="btn btn-primary " onClick={() => handleDelete(product)}>delete</button>
 
 
 

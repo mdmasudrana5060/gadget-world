@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import useToken from '../Hooks/useToken';
 
@@ -12,14 +12,15 @@ const Signup = () => {
     const [signUpError, setSignUpError] = useState('');
     const { createUser, updateUser,googleSignIn } = useContext(AuthContext);
     const [createdUserEmail, setCreatedUserEmail] = useState('');
-    const [glogin, setGlogin] = useState('');
-  
+    const [glogin,setGlogin]=useState('')
+    const location = useLocation();
     const [token] = useToken(createdUserEmail);
     const [gtoken] = useToken(glogin);
     const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
   
     if (token|| gtoken) {
-        navigate('/')
+        navigate(from, { replace: true });
     }
 
     // handling signup
@@ -51,17 +52,17 @@ const Signup = () => {
             });
 
     }
-    // const handleGoogleSignIn = () => {
-    //     googleSignIn()
-    //     .then(result=>{
-    //         const user=result.user;
-    //         setGlogin(user.email)
-    //     })
-    //     .catch(error=>{
-    //         console.log(error.message)
-    //     })
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+        .then(result=>{
+            const user=result.user;
+            setGlogin(user.email)
+        })
+        .catch(error=>{
+            console.log(error.message)
+        })
 
-    // }
+    }
     // post the data of user in database
 
     const saveUser = (name, email) => {
@@ -132,7 +133,7 @@ const Signup = () => {
                 </form>
                 <p>Already have an account! <Link to="/login" className='text-secondary'>Please Login</Link> </p>
                 <div className="divider">OR</div>
-                <button onClick={googleSignIn} className='btn btn-outline w-full font-bold'>Continue With Google</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full font-bold'>Continue With Google</button>
 
             </div>
 

@@ -28,7 +28,7 @@ const Navbar = () => {
                     <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/order">Order</Link></li>
-                        <li><Link to="/myorder">My Order</Link></li>
+                        {/* <li><Link to="/myorder">My Order</Link></li> */}
                        
                         {
                             user?.uid ?
@@ -47,7 +47,7 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal p-0" >
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to="/order">Order</Link></li>
-                    <li><Link to="/myorder">My Order</Link></li>
+                    {/* <li><Link to="/myorder">My Order</Link></li> */}
 
 
                     {

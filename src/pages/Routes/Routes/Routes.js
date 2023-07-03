@@ -25,10 +25,10 @@ const router = createBrowserRouter([
 
             },
 
-            {
-                path: '/myorder',
-                element: <PrivateRoute><MyOrder></MyOrder></PrivateRoute>
-            },
+            // {
+            //     path: '/myorder',
+            //     element: <PrivateRoute><MyOrder></MyOrder></PrivateRoute>
+            // },
             {
                 path: '/checkout',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
